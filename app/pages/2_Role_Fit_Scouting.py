@@ -1,13 +1,29 @@
 ﻿from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
+from fm_engine.fast_data import (
+    get_file_signature,
+    list_saved_files as fast_list_saved_files,
+    load_fm_file_cached,
+)
+
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
+
+
+def load_page_file(path: Path) -> pd.DataFrame:
+    path_text, mtime, size = get_file_signature(path)
+    return load_fm_file_cached(path_text, mtime, size).copy()
 
 
 ROLE_PROFILES = {
@@ -357,7 +373,7 @@ top_n = st.sidebar.slider(
     step=10,
 )
 
-df = load_file(selected_file)
+df = load_page_file(selected_file)
 df = add_position_group(df)
 
 league_col = find_column(df, ["Division", "League"])

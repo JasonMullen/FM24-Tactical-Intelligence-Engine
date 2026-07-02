@@ -1,0 +1,21 @@
+{
+    "dashboard": {
+        "dashboard_active_file": "FM_player_data.html",
+        "dashboard_active_view": "Full Organized View",
+        "dashboard_name_search": "",
+        "dashboard_selected_leagues": [],
+        "dashboard_selected_lines": [],
+        "dashboard_selected_groups": [],
+        "dashboard_selected_positions": [],
+        "dashboard_selected_raw_positions": [],
+        "dashboard_selected_clubs": [],
+        "dashboard_age_range": [
+            16,
+            41
+        ],
+        "dashboard_pick_attributes": [],
+        "dashboard_attribute_condition": "Is At Least",
+        "dashboard_attribute_value": 12,
+        "dashboard_attribute_match_mode": "Match ALL selected attributes"
+    }
+}

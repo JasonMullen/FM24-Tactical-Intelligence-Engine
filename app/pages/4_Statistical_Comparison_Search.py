@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -8,7 +9,22 @@ import streamlit as st
 from sklearn.metrics.pairwise import cosine_similarity
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
+from fm_engine.fast_data import (
+    get_file_signature,
+    list_saved_files as fast_list_saved_files,
+    load_fm_file_cached,
+)
+
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
+
+
+def load_page_file(path: Path) -> pd.DataFrame:
+    path_text, mtime, size = get_file_signature(path)
+    return load_fm_file_cached(path_text, mtime, size).copy()
 
 STAT_COLUMNS = [
     "Apps", "Starts", "Mins", "Gls", "Ast", "xG", "xA", "Av Rat",
@@ -237,7 +253,7 @@ st.write(
     """
 )
 
-saved_files = list_saved_files()
+saved_files = fast_list_saved_files()
 
 if not saved_files:
     st.info("Upload your FM24 database on the main dashboard first.")
@@ -249,7 +265,7 @@ selected_file = st.sidebar.selectbox(
     format_func=lambda path: path.name,
 )
 
-df = load_file(selected_file)
+df = load_page_file(selected_file)
 name_col = find_column(df, ["Name", "Player"])
 
 if not name_col:

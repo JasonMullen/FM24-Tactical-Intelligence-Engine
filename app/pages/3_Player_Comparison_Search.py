@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -8,7 +9,22 @@ import streamlit as st
 from sklearn.metrics.pairwise import cosine_similarity
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
+from fm_engine.fast_data import (
+    get_file_signature,
+    list_saved_files as fast_list_saved_files,
+    load_fm_file_cached,
+)
+
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
+
+
+def load_page_file(path: Path) -> pd.DataFrame:
+    path_text, mtime, size = get_file_signature(path)
+    return load_fm_file_cached(path_text, mtime, size).copy()
 
 
 # ============================================================
@@ -696,7 +712,7 @@ st.write(
     """
 )
 
-saved_files = list_saved_files()
+saved_files = fast_list_saved_files()
 
 if not saved_files:
     st.info("Upload a player database on the main dashboard first.")
@@ -708,7 +724,7 @@ selected_file = st.sidebar.selectbox(
     format_func=lambda path: path.name,
 )
 
-raw_df = load_file(selected_file)
+raw_df = load_page_file(selected_file)
 df = add_position_classification(raw_df)
 df = add_overall_attribute_scores(df)
 
