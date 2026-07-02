@@ -13,11 +13,6 @@ sys.path.append(str(PROJECT_ROOT))
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-
-# ============================================================
-# COLUMN DEFINITIONS
-# ============================================================
-
 IDENTITY_COLUMNS = [
     "Name", "Age", "Nat", "Based", "Club", "Division", "League",
     "Height", "Weight", "Position", "Primary Position", "Position Classes",
@@ -72,99 +67,46 @@ STATS_COLUMNS = [
     "Aer A/90"
 ]
 
+ATTRIBUTE_LABELS = {
+    "Tec": "Technique", "Tck": "Tackling", "Pen": "Penalty Taking",
+    "Pas": "Passing", "Mar": "Marking", "L Th": "Long Throws",
+    "Lon": "Long Shots", "Hea": "Heading", "Fre": "Free Kicks",
+    "Fir": "First Touch", "Fin": "Finishing", "Dri": "Dribbling",
+    "Cro": "Crossing", "Cor": "Corners",
+    "Wor": "Work Rate", "Vis": "Vision", "Tea": "Teamwork",
+    "Pos": "Positioning", "OtB": "Off The Ball", "Ldr": "Leadership",
+    "Fla": "Flair", "Det": "Determination", "Dec": "Decisions",
+    "Cnt": "Concentration", "Cmp": "Composure", "Bra": "Bravery",
+    "Ant": "Anticipation", "Agg": "Aggression",
+    "Acc": "Acceleration", "Str": "Strength", "Sta": "Stamina",
+    "Pac": "Pace", "Nat": "Natural Fitness", "Jum": "Jumping Reach",
+    "Bal": "Balance", "Agi": "Agility",
+    "Thr": "Throwing", "TRO": "Rushing Out", "Ref": "Reflexes",
+    "Pun": "Punching", "1v1": "One on Ones", "Kic": "Kicking",
+    "Han": "Handling", "Ecc": "Eccentricity", "Com": "Communication",
+    "Cmd": "Command of Area", "Aer": "Aerial Reach",
+}
 
 DISPLAY_NAMES = {
-    "Name": "Name",
-    "Age": "Age",
-    "Nat": "Nationality",
-    "Based": "Based",
-    "Club": "Club",
-    "Division": "League / Division",
-    "League": "League",
-    "Height": "Height",
-    "Weight": "Weight",
-    "Position": "FM Position",
-    "Primary Position": "Primary Position",
-    "Position Classes": "Position Classes",
-    "Position Group": "Position Group",
-    "Position Line": "Position Line",
-    "Position Family": "Position Family",
-    "Transfer Value": "Transfer Value",
-    "Transfer Status": "Transfer Status",
-
-    "Tec": "Tec (Technique)",
-    "Tck": "Tck (Tackling)",
-    "Pen": "Pen (Penalty Taking)",
-    "Pas": "Pas (Passing)",
-    "Mar": "Mar (Marking)",
-    "L Th": "L Th (Long Throws)",
-    "Lon": "Lon (Long Shots)",
-    "Hea": "Hea (Heading)",
-    "Fre": "Fre (Free Kicks)",
-    "Fir": "Fir (First Touch)",
-    "Fin": "Fin (Finishing)",
-    "Dri": "Dri (Dribbling)",
-    "Cro": "Cro (Crossing)",
-    "Cor": "Cor (Corners)",
-
-    "Wor": "Wor (Work Rate)",
-    "Vis": "Vis (Vision)",
-    "Tea": "Tea (Teamwork)",
-    "Pos": "Pos (Positioning)",
-    "OtB": "OtB (Off The Ball)",
-    "Ldr": "Ldr (Leadership)",
-    "Fla": "Fla (Flair)",
-    "Det": "Det (Determination)",
-    "Dec": "Dec (Decisions)",
-    "Cnt": "Cnt (Concentration)",
-    "Cmp": "Cmp (Composure)",
-    "Bra": "Bra (Bravery)",
-    "Ant": "Ant (Anticipation)",
-    "Agg": "Agg (Aggression)",
-
-    "Acc": "Acc (Acceleration)",
-    "Str": "Str (Strength)",
-    "Sta": "Sta (Stamina)",
-    "Pac": "Pac (Pace)",
-    "Jum": "Jum (Jumping Reach)",
-    "Bal": "Bal (Balance)",
-    "Agi": "Agi (Agility)",
-
-    "Thr": "Thr (Throwing)",
-    "TRO": "TRO (Rushing Out)",
-    "Ref": "Ref (Reflexes)",
-    "Pun": "Pun (Punching)",
-    "1v1": "1v1 (One on Ones)",
-    "Kic": "Kic (Kicking)",
-    "Han": "Han (Handling)",
-    "Ecc": "Ecc (Eccentricity)",
-    "Com": "Com (Communication)",
-    "Cmd": "Cmd (Command of Area)",
-    "Aer": "Aer (Aerial Reach)",
-
-    "Apps": "Apps (Appearances)",
-    "Starts": "Starts",
-    "Mins": "Minutes",
-    "Gls": "Goals",
-    "Ast": "Assists",
-    "xG": "Expected Goals",
-    "xA": "Expected Assists",
-    "Av Rat": "Average Rating",
-    "Tck/90": "Tackles per 90",
-    "Int/90": "Interceptions per 90",
-    "Drb/90": "Dribbles per 90",
-    "Pas %": "Pass Completion %",
-    "Poss Won/90": "Possession Won per 90",
-    "Poss Lost/90": "Possession Lost per 90",
-    "Sprints/90": "Sprints per 90",
-    "Hdr %": "Header Win %",
+    "Name": "Name", "Age": "Age", "Nat": "Nationality", "Based": "Based",
+    "Club": "Club", "Division": "League / Division", "League": "League",
+    "Height": "Height", "Weight": "Weight", "Position": "FM Position",
+    "Primary Position": "Primary Position", "Position Classes": "Position Classes",
+    "Position Group": "Position Group", "Position Line": "Position Line",
+    "Position Family": "Position Family", "Transfer Value": "Transfer Value",
+    "Transfer Status": "Transfer Status", "Apps": "Apps (Appearances)",
+    "Starts": "Starts", "Mins": "Minutes", "Gls": "Goals", "Ast": "Assists",
+    "xG": "Expected Goals", "xA": "Expected Assists", "Av Rat": "Average Rating",
+    "Tck/90": "Tackles per 90", "Int/90": "Interceptions per 90",
+    "Drb/90": "Dribbles per 90", "Pas %": "Pass Completion %",
+    "Poss Won/90": "Possession Won per 90", "Poss Lost/90": "Possession Lost per 90",
+    "Sprints/90": "Sprints per 90", "Hdr %": "Header Win %",
     "Conv %": "Conversion %",
 }
 
+for short_name, long_name in ATTRIBUTE_LABELS.items():
+    DISPLAY_NAMES[short_name] = f"{short_name} ({long_name})"
 
-# ============================================================
-# FILE HELPERS
-# ============================================================
 
 def safe_filename(filename: str) -> str:
     filename = filename.strip().replace(" ", "_")
@@ -175,21 +117,17 @@ def safe_filename(filename: str) -> str:
 def save_uploaded_file(uploaded_file) -> Path:
     filename = safe_filename(uploaded_file.name)
     path = UPLOAD_DIR / filename
-
     with open(path, "wb") as f:
         f.write(uploaded_file.getbuffer())
-
     return path
 
 
 def list_saved_files() -> list[Path]:
     allowed = {".csv", ".xlsx", ".xls", ".html", ".htm"}
-
     files = [
         file for file in UPLOAD_DIR.iterdir()
         if file.is_file() and file.suffix.lower() in allowed
     ]
-
     return sorted(files, key=lambda file: file.stat().st_mtime, reverse=True)
 
 
@@ -197,58 +135,42 @@ def flatten_column_name(col) -> str:
     if isinstance(col, tuple):
         parts = [str(part).strip() for part in col if str(part).strip()]
         return parts[-1] if parts else "Unknown"
-
     return str(col).strip()
 
 
 def make_unique_columns(columns) -> list[str]:
     seen = {}
     fixed = []
-
     for col in columns:
         base = flatten_column_name(col)
-
         if base == "" or base.lower().startswith("unnamed"):
             base = "Unknown"
-
         key = base.lower()
-
         if key not in seen:
             seen[key] = 1
             fixed.append(base)
         else:
             seen[key] += 1
             fixed.append(f"{base}__{seen[key]}")
-
     return fixed
 
 
 def load_file(path: Path) -> pd.DataFrame:
     suffix = path.suffix.lower()
-
     if suffix == ".csv":
         df = pd.read_csv(path)
-
     elif suffix in [".xlsx", ".xls"]:
         df = pd.read_excel(path)
-
     elif suffix in [".html", ".htm"]:
         tables = pd.read_html(path)
         if not tables:
             raise ValueError("No table found in this FM HTML file.")
-
         df = max(tables, key=lambda table: table.shape[0] * table.shape[1])
-
     else:
         raise ValueError("Unsupported file type.")
-
     df.columns = make_unique_columns(df.columns)
     return df
 
-
-# ============================================================
-# CLEANING
-# ============================================================
 
 def base_column_name(col: str) -> str:
     return re.sub(r"__\d+$", "", str(col))
@@ -263,29 +185,20 @@ def duplicate_number(col: str) -> int:
 
 def clean_database(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
-
     df = df.dropna(axis=0, how="all")
     df = df.dropna(axis=1, how="all")
     df.columns = make_unique_columns(df.columns)
-
     unnamed = [
         col for col in df.columns
         if base_column_name(col).lower().startswith("unnamed")
     ]
-
     df = df.drop(columns=unnamed, errors="ignore")
     df = df.drop_duplicates()
-
     return df
 
 
-# ============================================================
-# POSITION CLASSIFICATION
-# ============================================================
-
 POSITION_ORDER = [
-    "GK", "CB", "RB", "LB", "RWB", "LWB",
-    "DM", "CM", "RM", "LM",
+    "GK", "CB", "RB", "LB", "RWB", "LWB", "DM", "CM", "RM", "LM",
     "AM", "RW", "LW", "ST"
 ]
 
@@ -302,58 +215,34 @@ def has_position(text: str, patterns: list[str]) -> bool:
 
 
 def classify_position_classes(position_text: str) -> list[str]:
-    """
-    Converts FM position text into clean position classes.
-
-    Examples:
-    DM, M (C) -> DM, CM
-    AM (L), ST (C) -> LW, ST
-    D (C), DM -> CB, DM
-    WB (R), D (R) -> RWB, RB
-    """
-
     text = normalize_position_text(position_text)
     found = []
-
     if has_position(text, ["GK"]):
         found.append("GK")
-
-    if has_position(text, ["D(C)", "DC", "D/DM(C)", "SW"]):
+    if has_position(text, ["D(C)", "DC", "SW"]):
         found.append("CB")
-
     if has_position(text, ["D(R)", "DR"]):
         found.append("RB")
-
     if has_position(text, ["D(L)", "DL"]):
         found.append("LB")
-
     if has_position(text, ["WB(R)", "WBR"]):
         found.append("RWB")
-
     if has_position(text, ["WB(L)", "WBL"]):
         found.append("LWB")
-
     if has_position(text, ["DM", "DM(C)"]):
         found.append("DM")
-
     if has_position(text, ["M(C)", "MC"]):
         found.append("CM")
-
     if has_position(text, ["M(R)", "MR"]):
         found.append("RM")
-
     if has_position(text, ["M(L)", "ML"]):
         found.append("LM")
-
     if has_position(text, ["AM(C)", "AMC"]):
         found.append("AM")
-
     if has_position(text, ["AM(R)", "AMR"]):
         found.append("RW")
-
     if has_position(text, ["AM(L)", "AML"]):
         found.append("LW")
-
     if has_position(text, ["ST", "ST(C)", "SC", "CF"]):
         found.append("ST")
 
@@ -361,112 +250,88 @@ def classify_position_classes(position_text: str) -> list[str]:
     for pos in POSITION_ORDER:
         if pos in found and pos not in clean_found:
             clean_found.append(pos)
-
     return clean_found
 
 
 def primary_position_from_classes(position_classes: list[str]) -> str:
     if not position_classes:
         return "Unknown"
-
-    priority = [
-        "GK", "ST", "AM", "RW", "LW", "CM", "DM",
-        "CB", "RB", "LB", "RWB", "LWB", "RM", "LM"
-    ]
-
+    priority = ["GK", "ST", "AM", "RW", "LW", "CM", "DM", "CB", "RB", "LB", "RWB", "LWB", "RM", "LM"]
     for pos in priority:
         if pos in position_classes:
             return pos
-
     return position_classes[0]
 
 
 def position_group_from_classes(position_classes: list[str]) -> str:
     if not position_classes:
         return "Unknown"
-
     if "GK" in position_classes:
         return "Goalkeeper"
-
-    if any(pos in position_classes for pos in ["CB"]):
+    if "CB" in position_classes:
         return "Center Back"
-
     if any(pos in position_classes for pos in ["RB", "LB", "RWB", "LWB"]):
         return "Fullback / Wingback"
-
     if "DM" in position_classes:
         return "Defensive Midfielder"
-
     if any(pos in position_classes for pos in ["CM", "RM", "LM"]):
         return "Midfielder"
-
     if "AM" in position_classes:
         return "Attacking Midfielder"
-
     if any(pos in position_classes for pos in ["RW", "LW"]):
         return "Wide Attacker"
-
     if "ST" in position_classes:
         return "Striker"
-
     return "Unknown"
 
 
 def position_line_from_classes(position_classes: list[str]) -> str:
     if not position_classes:
         return "Unknown"
-
     if "GK" in position_classes:
         return "Goalkeeper"
-
     if any(pos in position_classes for pos in ["CB", "RB", "LB", "RWB", "LWB"]):
         return "Defense"
-
     if any(pos in position_classes for pos in ["DM", "CM", "RM", "LM", "AM"]):
         return "Midfield"
-
     if any(pos in position_classes for pos in ["RW", "LW", "ST"]):
         return "Attack"
-
     return "Unknown"
 
 
 def position_family_from_classes(position_classes: list[str]) -> str:
     if not position_classes:
         return "Unknown"
-
     if "GK" in position_classes:
         return "Goalkeeper"
-
     if "CB" in position_classes:
         return "Central Defender"
-
     if any(pos in position_classes for pos in ["RB", "LB", "RWB", "LWB"]):
         return "Wide Defender"
-
     if "DM" in position_classes:
         return "Pivot / Number 6"
-
     if "CM" in position_classes:
         return "Central Midfielder / Number 8"
-
     if "AM" in position_classes:
         return "Creator / Number 10"
-
     if any(pos in position_classes for pos in ["RW", "LW", "RM", "LM"]):
         return "Wide Player"
-
     if "ST" in position_classes:
         return "Forward / Number 9"
-
     return "Unknown"
+
+
+def find_column(df: pd.DataFrame, possible_names: list[str]) -> str | None:
+    wanted = {name.lower() for name in possible_names}
+    for col in df.columns:
+        if base_column_name(col).lower() in wanted:
+            return col
+    return None
 
 
 def add_position_classification(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
-
     position_col = find_column(df, ["Position", "Positions"])
-
     if not position_col:
         df["Position Classes"] = "Unknown"
         df["Primary Position"] = "Unknown"
@@ -476,84 +341,59 @@ def add_position_classification(df: pd.DataFrame) -> pd.DataFrame:
         return df
 
     classes_series = df[position_col].apply(classify_position_classes)
-
-    df["Position Classes"] = classes_series.apply(
-        lambda classes: ", ".join(classes) if classes else "Unknown"
-    )
-
+    df["Position Classes"] = classes_series.apply(lambda classes: ", ".join(classes) if classes else "Unknown")
     df["Primary Position"] = classes_series.apply(primary_position_from_classes)
     df["Position Group"] = classes_series.apply(position_group_from_classes)
     df["Position Line"] = classes_series.apply(position_line_from_classes)
     df["Position Family"] = classes_series.apply(position_family_from_classes)
-
     return df
 
 
-# ============================================================
-# COLUMN ORGANIZATION
-# ============================================================
-
 def get_identity_columns(df: pd.DataFrame) -> list[str]:
     matched = []
-
     wanted = {col.lower() for col in IDENTITY_COLUMNS}
-
     for col in df.columns:
         base = base_column_name(col).lower()
-
         if base in wanted:
             if base == "nat" and col != "Nat":
                 continue
-
             if col not in matched:
                 matched.append(col)
-
     return matched
 
 
 def get_first_attribute_columns(df: pd.DataFrame, wanted_columns: list[str]) -> list[str]:
     matched = []
     wanted = {col.lower() for col in wanted_columns}
-
     for col in df.columns:
         base = base_column_name(col)
-
-        if base.lower() in wanted:
-            if duplicate_number(col) == 1:
-                matched.append(col)
-
+        if base.lower() in wanted and duplicate_number(col) == 1:
+            matched.append(col)
     return matched
 
 
 def get_physical_columns(df: pd.DataFrame) -> list[str]:
     matched = []
-
     for col in df.columns:
         base = base_column_name(col)
-
         if base not in PHYSICAL_ATTRIBUTES:
             continue
-
         if base == "Nat":
             if col != "Nat":
                 matched.append(col)
         else:
             if duplicate_number(col) == 1:
                 matched.append(col)
-
     return matched
 
 
 def get_stat_columns(df: pd.DataFrame, used_columns: set[str]) -> list[str]:
     matched = []
     wanted = {col.lower() for col in STATS_COLUMNS}
-
     for col in df.columns:
         base = base_column_name(col).lower()
-
         if base in wanted and col not in used_columns:
             matched.append(col)
-
     return matched
 
 
@@ -563,24 +403,13 @@ def organize_columns(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, list[str
     mental_cols = get_first_attribute_columns(df, MENTAL_ATTRIBUTES)
     physical_cols = get_physical_columns(df)
     gk_cols = get_first_attribute_columns(df, GOALKEEPING_ATTRIBUTES)
-
-    used_before_stats = set(
-        identity_cols + technical_cols + mental_cols + physical_cols + gk_cols
-    )
-
+    used_before_stats = set(identity_cols + technical_cols + mental_cols + physical_cols + gk_cols)
     stats_cols = get_stat_columns(df, used_before_stats)
+    attribute_cols = technical_cols + mental_cols + physical_cols + gk_cols
 
     ordered = []
     used = set()
-
-    for group in [
-        identity_cols,
-        technical_cols,
-        mental_cols,
-        physical_cols,
-        gk_cols,
-        stats_cols,
-    ]:
+    for group in [identity_cols, attribute_cols, stats_cols]:
         for col in group:
             if col not in used:
                 ordered.append(col)
@@ -591,6 +420,7 @@ def organize_columns(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, list[str
 
     grouped = {
         "Identity": identity_cols,
+        "All Attributes": attribute_cols,
         "Technical Attributes": technical_cols,
         "Mental Attributes": mental_cols,
         "Physical Attributes": physical_cols,
@@ -598,28 +428,18 @@ def organize_columns(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, list[str
         "Stats": stats_cols,
         "Other Columns": other_cols,
     }
-
     return df[ordered].copy(), grouped
 
 
-# ============================================================
-# DISPLAY HELPERS
-# ============================================================
-
 def readable_column_name(col: str) -> str:
     base = base_column_name(col)
-
     if col == "Nat":
         return "Nationality"
-
     if col.startswith("Nat__"):
         return "Nat (Natural Fitness)"
-
     label = DISPLAY_NAMES.get(base, base)
-
     if col != base:
         return f"{label} [{col}]"
-
     return label
 
 
@@ -629,21 +449,124 @@ def make_display_df(df: pd.DataFrame) -> pd.DataFrame:
     return display_df
 
 
-def find_column(df: pd.DataFrame, possible_names: list[str]) -> str | None:
-    wanted = {name.lower() for name in possible_names}
-
-    for col in df.columns:
-        if base_column_name(col).lower() in wanted:
-            return col
-
-    return None
+def get_attribute_short_label(col: str) -> str:
+    base = base_column_name(col)
+    if col.startswith("Nat__"):
+        return "Nat"
+    return base
 
 
-# ============================================================
-# FILTERS
-# ============================================================
+def add_all_attributes_summary_column(df: pd.DataFrame, attribute_cols: list[str]) -> pd.DataFrame:
+    df = df.copy()
+    actual_cols = [col for col in attribute_cols if col in df.columns]
 
-def apply_filters(df: pd.DataFrame) -> pd.DataFrame:
+    def build_summary(row: pd.Series) -> str:
+        values = []
+        for col in actual_cols:
+            value = row.get(col)
+            if pd.isna(value):
+                continue
+            numeric = pd.to_numeric(value, errors="coerce")
+            if pd.isna(numeric):
+                continue
+            values.append(f"{get_attribute_short_label(col)} {int(numeric)}")
+        return " | ".join(values)
+
+    df["All Attributes"] = df.apply(build_summary, axis=1)
+
+    identity_cols = [col for col in get_identity_columns(df) if col in df.columns]
+    remaining_cols = [col for col in df.columns if col not in identity_cols and col != "All Attributes"]
+    return df[identity_cols + ["All Attributes"] + remaining_cols]
+
+
+def apply_attribute_search_filter(df: pd.DataFrame, attribute_cols: list[str]) -> pd.DataFrame:
+    filtered = df.copy()
+    actual_attribute_cols = [col for col in attribute_cols if col in filtered.columns]
+
+    st.sidebar.divider()
+    st.sidebar.header("Pick Attributes Filter")
+
+    if not actual_attribute_cols:
+        st.sidebar.info("No attribute columns were found.")
+        return filtered
+
+    label_to_col = {
+        readable_column_name(col): col
+        for col in actual_attribute_cols
+    }
+
+    selected_labels = st.sidebar.multiselect(
+        "Pick Attributes",
+        options=list(label_to_col.keys()),
+        default=[],
+        help="Example: Pace, Acceleration, First Touch, Passing, Agility"
+    )
+
+    if not selected_labels:
+        return filtered
+
+    condition = st.sidebar.selectbox(
+        "Condition",
+        ["Is At Least", "Is At Most", "Is Exactly"],
+        index=0,
+    )
+
+    value = st.sidebar.slider(
+        "Attribute Value",
+        min_value=1,
+        max_value=20,
+        value=12,
+        step=1,
+    )
+
+    match_mode = st.sidebar.radio(
+        "Match Type",
+        ["Match ALL selected attributes", "Match ANY selected attribute"],
+        index=0,
+    )
+
+    masks = []
+    for label in selected_labels:
+        col = label_to_col[label]
+        numeric_col = pd.to_numeric(filtered[col], errors="coerce")
+
+        if condition == "Is At Least":
+            masks.append(numeric_col >= value)
+        elif condition == "Is At Most":
+            masks.append(numeric_col <= value)
+        else:
+            masks.append(numeric_col == value)
+
+    if not masks:
+        return filtered
+
+    if match_mode == "Match ALL selected attributes":
+        final_mask = masks[0]
+        for mask in masks[1:]:
+            final_mask = final_mask & mask
+    else:
+        final_mask = masks[0]
+        for mask in masks[1:]:
+            final_mask = final_mask | mask
+
+    filtered = filtered[final_mask.fillna(False)].copy()
+
+    matched_cols = [label_to_col[label] for label in selected_labels]
+    numeric_selected = filtered[matched_cols].apply(pd.to_numeric, errors="coerce")
+
+    if condition == "Is At Least":
+        filtered["Attribute Matches"] = (numeric_selected >= value).sum(axis=1)
+    elif condition == "Is At Most":
+        filtered["Attribute Matches"] = (numeric_selected <= value).sum(axis=1)
+    else:
+        filtered["Attribute Matches"] = (numeric_selected == value).sum(axis=1)
+
+    filtered["Attribute Filter"] = f"{match_mode.replace('Match ', '')}: {condition} {value}"
+
+    return filtered
+
+
+def apply_general_filters(df: pd.DataFrame) -> pd.DataFrame:
     filtered = df.copy()
 
     st.sidebar.divider()
@@ -667,94 +590,50 @@ def apply_filters(df: pd.DataFrame) -> pd.DataFrame:
 
     if league_col:
         leagues = sorted(filtered[league_col].dropna().astype(str).unique().tolist())
-        selected_leagues = st.sidebar.multiselect(
-            "Select Multiple Leagues / Divisions",
-            leagues,
-            default=[],
-        )
-
+        selected_leagues = st.sidebar.multiselect("Select Multiple Leagues / Divisions", leagues, default=[])
         if selected_leagues:
             filtered = filtered[filtered[league_col].astype(str).isin(selected_leagues)]
 
     if position_line_col:
         lines = sorted(filtered[position_line_col].dropna().astype(str).unique().tolist())
-        selected_lines = st.sidebar.multiselect(
-            "Select Position Lines",
-            lines,
-            default=[],
-        )
-
+        selected_lines = st.sidebar.multiselect("Select Position Lines", lines, default=[])
         if selected_lines:
             filtered = filtered[filtered[position_line_col].astype(str).isin(selected_lines)]
 
     if position_group_col:
         groups = sorted(filtered[position_group_col].dropna().astype(str).unique().tolist())
-        selected_groups = st.sidebar.multiselect(
-            "Select Position Groups",
-            groups,
-            default=[],
-        )
-
+        selected_groups = st.sidebar.multiselect("Select Position Groups", groups, default=[])
         if selected_groups:
             filtered = filtered[filtered[position_group_col].astype(str).isin(selected_groups)]
 
     if primary_position_col:
         positions = sorted(filtered[primary_position_col].dropna().astype(str).unique().tolist())
-        selected_positions = st.sidebar.multiselect(
-            "Select Multiple Positions",
-            positions,
-            default=[],
-        )
-
+        selected_positions = st.sidebar.multiselect("Select Multiple Positions", positions, default=[])
         if selected_positions:
             filtered = filtered[filtered[primary_position_col].astype(str).isin(selected_positions)]
 
     if position_col:
         raw_positions = sorted(filtered[position_col].dropna().astype(str).unique().tolist())
-        selected_raw_positions = st.sidebar.multiselect(
-            "Select Raw FM Positions",
-            raw_positions,
-            default=[],
-        )
-
+        selected_raw_positions = st.sidebar.multiselect("Select Raw FM Positions", raw_positions, default=[])
         if selected_raw_positions:
             filtered = filtered[filtered[position_col].astype(str).isin(selected_raw_positions)]
 
     if club_col:
         clubs = sorted(filtered[club_col].dropna().astype(str).unique().tolist())
-        selected_clubs = st.sidebar.multiselect(
-            "Select Multiple Clubs",
-            clubs,
-            default=[],
-        )
-
+        selected_clubs = st.sidebar.multiselect("Select Multiple Clubs", clubs, default=[])
         if selected_clubs:
             filtered = filtered[filtered[club_col].astype(str).isin(selected_clubs)]
 
     if age_col:
         numeric_age = pd.to_numeric(filtered[age_col], errors="coerce")
-
         if numeric_age.notna().any():
             min_age = int(numeric_age.min())
             max_age = int(numeric_age.max())
-
-            age_range = st.sidebar.slider(
-                "Age Range",
-                min_value=min_age,
-                max_value=max_age,
-                value=(min_age, max_age),
-            )
-
-            filtered = filtered[
-                numeric_age.between(age_range[0], age_range[1], inclusive="both")
-            ]
+            age_range = st.sidebar.slider("Age Range", min_value=min_age, max_value=max_age, value=(min_age, max_age))
+            filtered = filtered[numeric_age.between(age_range[0], age_range[1], inclusive="both")]
 
     return filtered
 
-
-# ============================================================
-# STREAMLIT APP
-# ============================================================
 
 st.set_page_config(
     page_title="FM24 Tactical Intelligence Engine",
@@ -766,8 +645,8 @@ st.title("FM24 Tactical Intelligence Engine")
 
 st.write(
     """
-    Upload your FM24 player database. The dashboard now classifies positions,
-    supports multiple league and position filters, and organizes attributes and stats.
+    Upload your FM24 player database. The dashboard saves the file, classifies positions,
+    adds an All Attributes column, and lets you filter players by selected attributes.
     """
 )
 
@@ -819,18 +698,22 @@ try:
     clean_df = clean_database(raw_df)
     classified_df = add_position_classification(clean_df)
     organized_df, grouped = organize_columns(classified_df)
-    filtered_df = apply_filters(organized_df)
-    display_df = make_display_df(filtered_df)
 
-    st.success(
-        f"Loaded {len(display_df):,} players and {len(display_df.columns):,} columns from {selected_file_name}."
-    )
+    filtered_df = apply_general_filters(organized_df)
+    filtered_df = apply_attribute_search_filter(filtered_df, grouped["All Attributes"])
+
+    view_df = add_all_attributes_summary_column(filtered_df, grouped["All Attributes"])
+    display_df = make_display_df(view_df)
 
     total_attributes = (
         len(grouped["Technical Attributes"])
         + len(grouped["Mental Attributes"])
         + len(grouped["Physical Attributes"])
         + len(grouped["Goalkeeping Attributes"])
+    )
+
+    st.success(
+        f"Loaded {len(display_df):,} players and {len(display_df.columns):,} columns from {selected_file_name}."
     )
 
     metric1, metric2, metric3, metric4 = st.columns(4)
@@ -842,17 +725,17 @@ try:
     st.subheader("Organized Player Database")
 
     st.caption(
-        "Order: Identity and position classification → Technical → Mental → Physical → Goalkeeping → Stats."
+        "Order: Identity → All Attributes Summary → Technical → Mental → Physical → Goalkeeping → Stats."
     )
 
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(
         [
             "Full Organized View",
+            "All Attributes",
             "Position Classification",
             "Identity",
             "Technical",
-            "Mental",
-            "Physical + GK",
+            "Mental + Physical",
             "Stats",
             "Column Groups",
         ]
@@ -862,6 +745,15 @@ try:
         st.dataframe(display_df, use_container_width=True, height=650)
 
     with tab2:
+        cols = grouped["Identity"] + grouped["All Attributes"]
+        if "Attribute Matches" in filtered_df.columns:
+            cols = ["Attribute Matches"] + cols
+        if "Attribute Filter" in filtered_df.columns:
+            cols = ["Attribute Filter"] + cols
+        cols = [col for col in cols if col in filtered_df.columns]
+        st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
+
+    with tab3:
         position_cols = [
             col for col in grouped["Identity"]
             if base_column_name(col) in [
@@ -870,17 +762,11 @@ try:
                 "Position Line", "Position Family"
             ]
         ]
-
-        st.dataframe(
-            make_display_df(filtered_df[position_cols]),
-            use_container_width=True,
-            height=650,
-        )
+        st.dataframe(make_display_df(filtered_df[position_cols]), use_container_width=True, height=650)
 
         st.markdown(
             """
             ### Position Classification Logic
-
             - **GK** = Goalkeeper
             - **CB** = Center Back
             - **RB/LB** = Fullback
@@ -893,34 +779,23 @@ try:
             """
         )
 
-    with tab3:
+    with tab4:
         cols = [col for col in grouped["Identity"] if col in filtered_df.columns]
         st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
 
-    with tab4:
+    with tab5:
         cols = grouped["Identity"] + grouped["Technical Attributes"]
         cols = [col for col in cols if col in filtered_df.columns]
         st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
 
-    with tab5:
-        cols = grouped["Identity"] + grouped["Mental Attributes"]
-        cols = [col for col in cols if col in filtered_df.columns]
-        st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
-
     with tab6:
-        cols = (
-            grouped["Identity"]
-            + grouped["Physical Attributes"]
-            + grouped["Goalkeeping Attributes"]
-        )
-
+        cols = grouped["Identity"] + grouped["Mental Attributes"] + grouped["Physical Attributes"] + grouped["Goalkeeping Attributes"]
         cols = [col for col in cols if col in filtered_df.columns]
         st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
 
     with tab7:
         cols = grouped["Identity"] + grouped["Stats"]
         cols = [col for col in cols if col in filtered_df.columns]
-
         if cols:
             st.dataframe(make_display_df(filtered_df[cols]), use_container_width=True, height=650)
         else:
