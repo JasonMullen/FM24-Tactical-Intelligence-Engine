@@ -12,6 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.append(str(PROJECT_ROOT))
+from fm_engine.ui_memory import init_page_memory, save_page_memory
 
 from fm_engine.fast_data import (
     get_file_signature,
@@ -512,6 +513,8 @@ st.set_page_config(
     layout="wide",
 )
 
+init_page_memory(__file__)
+
 st.title("Tactic Screenshot Tweak Board")
 
 st.write(
@@ -802,3 +805,5 @@ if tactic:
     st.divider()
     st.subheader("Loaded Saved Tactic Context")
     st.json(tactic)
+
+save_page_memory(__file__)

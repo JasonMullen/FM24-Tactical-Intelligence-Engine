@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local app memory / cache
+configs/page_memory/
+configs/ui_state.json
+data/cache/
+outputs/

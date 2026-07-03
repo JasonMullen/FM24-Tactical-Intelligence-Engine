@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from fm_engine.ui_memory import init_page_memory, save_page_memory
 from PIL import Image
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -128,6 +129,8 @@ st.set_page_config(
     layout="wide",
 )
 
+init_page_memory(__file__)
+
 st.title("Live Match Feedback Board")
 
 st.write(
@@ -236,3 +239,5 @@ if recent_frames:
         st.image(str(frame), caption=frame.name, use_container_width=True)
 else:
     st.info("No frames captured yet.")
+
+save_page_memory(__file__)

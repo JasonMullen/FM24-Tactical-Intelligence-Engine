@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from fm_engine.value_cleaner import add_clean_estimated_value_columns
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CACHE_DIR = PROJECT_ROOT / "data" / "cache"
@@ -105,6 +106,7 @@ def load_fm_file_cached(path_text: str, mtime: float, size: int) -> pd.DataFrame
         return pd.read_pickle(cache_path)
 
     df = load_raw_file(path)
+    df = add_clean_estimated_value_columns(df)
 
     df.to_pickle(cache_path)
 
